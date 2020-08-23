@@ -11,22 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{userId}")
+@RequestMapping("/{userId}/transacoes")
 @AllArgsConstructor
 public class UsersTransactionsController {
 
     private TransactionService transactionService;
 
-    @GetMapping("/transacoes/{year}/{month}")
-    public String getUsersTransactionsByYearAndMonth(
+    @GetMapping("/{year}/{month}")
+    public List<Transaction> getUsersTransactionsByYearAndMonth(
             @PathVariable("userId") int userId,
             @PathVariable("year") int year,
             @PathVariable("month") int month) {
 
-        List<Transaction> usersTransactions = this.transactionService.getUsersTransactionsByYearAndMonth(userId, year, month);
 
+        final List<Transaction> usersTransactions =
+                this.transactionService.getOrCreateUsersTransactionsByYearAndMonth(userId, year, month);
 
-        return "test";
+        return usersTransactions;
     }
 
 

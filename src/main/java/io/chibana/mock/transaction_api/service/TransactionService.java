@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TransactionService {
 
-    List<Transaction> getUsersTransactionsByYearAndMonth(Integer userId, Integer year, Integer month);
+    List<Transaction> getOrCreateUsersTransactionsByYearAndMonth(Integer userId, Integer year, Integer month);
+
+    Transaction createTransaction(Integer userId);
 
 }

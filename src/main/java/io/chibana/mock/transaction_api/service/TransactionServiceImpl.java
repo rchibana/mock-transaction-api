@@ -1,7 +1,7 @@
 package io.chibana.mock.transaction_api.service;
 
 import io.chibana.mock.transaction_api.model.Transaction;
-import io.chibana.mock.transaction_api.repository.UserRepository;
+import io.chibana.mock.transaction_api.repository.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,12 +9,17 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class TransactionServiceImpl implements TransactionService {
+public final class TransactionServiceImpl implements TransactionService {
 
-    private UserRepository userRepository;
+    private TransactionRepository transactionRepository;
 
     @Override
-    public List<Transaction> getUsersTransactionsByYearAndMonth(Integer userId, Integer year, Integer month) {
+    public List<Transaction> getOrCreateUsersTransactionsByYearAndMonth(Integer userId, Integer year, Integer month) {
+        return null;
+    }
+
+    @Override
+    public Transaction createTransaction(Integer userId) {
         return null;
     }
 }
