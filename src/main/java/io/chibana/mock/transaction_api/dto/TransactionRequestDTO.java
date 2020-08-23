@@ -9,5 +9,4 @@ public class TransactionRequestDTO {
     private Integer month;
     private Integer year;
 
-
 }

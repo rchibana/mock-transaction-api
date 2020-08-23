@@ -1,5 +1,7 @@
 package io.chibana.mock.transaction_api.controller;
 
+import io.chibana.mock.transaction_api.dto.TransactionResponseDTO;
+import io.chibana.mock.transaction_api.dto.mapper.TransactionMapper;
 import io.chibana.mock.transaction_api.model.Transaction;
 import io.chibana.mock.transaction_api.service.TransactionService;
 import lombok.AllArgsConstructor;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersTransactionsController {
 
     private TransactionService transactionService;
+    private TransactionMapper transactionMapper;
 
     @GetMapping("/{year}/{month}")
-    public Transaction getUsersTransactionsByYearAndMonth(
+    public TransactionResponseDTO getUsersTransactionsByYearAndMonth(
             @PathVariable("userId") int userId,
             @PathVariable("year") String year,
             @PathVariable("month") String month) {
@@ -24,7 +27,7 @@ public class UsersTransactionsController {
         final Transaction transaction =
                 this.transactionService.getOrCreateUsersTransactionsByYearAndMonth(userId, year, month);
 
-        return transaction;
+        return this.transactionMapper.transactionToResponseDTO(transaction);
     }
 
 }
