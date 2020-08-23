@@ -2,12 +2,15 @@ package io.chibana.mock.transaction_api.service;
 
 import io.chibana.mock.transaction_api.model.Transaction;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Optional;
 
 public interface TransactionService {
 
-    List<Transaction> getOrCreateUsersTransactionsByYearAndMonth(Integer userId, Integer year, Integer month);
+    Transaction getOrCreateUsersTransactionsByYearAndMonth(Integer userId, String year, String month);
 
-    Transaction createTransaction(Integer userId);
+    Optional<Transaction> getUsersTransactionsByTimestamp(Integer userId, Timestamp createdDate);
+
+    Transaction createUsersTransactionWithTimestamp(Integer userId, Timestamp createdDate);
 
 }

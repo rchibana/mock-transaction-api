@@ -1,24 +1,31 @@
 package io.chibana.mock.transaction_api.model;
 
+import io.chibana.mock.transaction_api.util.Utils;
 import lombok.Data;
-import org.apache.commons.lang3.RandomStringUtils;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.Random;
 
 @Entity
+@NoArgsConstructor
 @Data
-public class Transaction {
+public final class Transaction {
+
+    public Transaction(Integer userId, Timestamp createdDate) {
+        this.userId = userId;
+        this.createdDate = createdDate;
+        this.description = Utils.generateRandomString(120, 10);
+        this.value = Utils.generateRandomBigInteger(7, 1);
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue
+    private Long id;
 
     @NotNull
     @DecimalMin(value = "1000")
@@ -27,6 +34,7 @@ public class Transaction {
 
     @NotNull
     @NotBlank
+    @Size(min = 10, max = 120)
     private String description;
 
     @NotNull
@@ -35,6 +43,6 @@ public class Transaction {
     private BigInteger value;
 
     @NotNull
-    private Timestamp creationDate;
+    private Timestamp createdDate;
 
 }

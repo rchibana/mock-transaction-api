@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/{userId}/transacoes")
 @AllArgsConstructor
@@ -18,18 +16,15 @@ public class UsersTransactionsController {
     private TransactionService transactionService;
 
     @GetMapping("/{year}/{month}")
-    public List<Transaction> getUsersTransactionsByYearAndMonth(
+    public Transaction getUsersTransactionsByYearAndMonth(
             @PathVariable("userId") int userId,
-            @PathVariable("year") int year,
-            @PathVariable("month") int month) {
+            @PathVariable("year") String year,
+            @PathVariable("month") String month) {
 
-
-        final List<Transaction> usersTransactions =
+        final Transaction transaction =
                 this.transactionService.getOrCreateUsersTransactionsByYearAndMonth(userId, year, month);
 
-        return usersTransactions;
+        return transaction;
     }
-
-
 
 }
