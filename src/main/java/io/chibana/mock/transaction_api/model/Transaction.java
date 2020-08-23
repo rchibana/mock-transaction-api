@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.math.BigInteger;
@@ -24,12 +25,12 @@ public final class Transaction {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @DecimalMin(value = "1000")
-    @DecimalMax(value = "100000000")
+    @Min(value = 1000)
+    @Max(value = 100000000)
     private Integer userId;
 
     @NotNull
