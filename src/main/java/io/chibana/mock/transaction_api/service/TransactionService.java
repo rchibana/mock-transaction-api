@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface TransactionService {
 
-    Transaction getOrCreateUsersTransactionsByYearAndMonth(Integer userId, String year, String month);
+    Transaction getOrCreateTransactionByTimestamp(Transaction transaction);
 
     Optional<Transaction> getUsersTransactionsByTimestamp(Integer userId, Timestamp createdDate);
 
-    Transaction createUsersTransactionWithTimestamp(Integer userId, Timestamp createdDate);
+    Transaction createUsersTransaction(Transaction transaction);
 
 }
