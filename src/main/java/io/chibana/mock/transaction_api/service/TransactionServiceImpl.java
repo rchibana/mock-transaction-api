@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.util.Optional;
 
 @Service
@@ -17,14 +16,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction getOrCreateTransactionByTimestamp(final Transaction transaction) {
-        return this.getUsersTransactionsByTimestamp(transaction.getUserId(), transaction.getCreatedDate())
+        return this.getUsersTransactionsByTimestamp(transaction)
                 .orElseGet(() -> this.createUsersTransaction(transaction));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Transaction> getUsersTransactionsByTimestamp(final Integer userId, final Timestamp createdDate) {
-        return transactionRepository.findByUserIdAndCreatedDate(userId, createdDate);
+    public Optional<Transaction> getUsersTransactionsByTimestamp(Transaction transaction) {
+        return transactionRepository.findByUserIdAndCreatedDate(transaction.getUserId(), transaction.getCreatedDate());
     }
 
     @Override
