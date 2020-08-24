@@ -14,6 +14,8 @@ import java.util.Locale;
 @Mapper(componentModel = "spring")
 public interface TransactionMapper {
 
+    Locale LOCALE_BRAZIL = new Locale("pt", "BR");
+
     @Mapping(target = "value", source = "value", qualifiedByName = "moneyConversion")
     TransactionResponseDTO modelToResponseDTO(Transaction transaction);
 
@@ -23,10 +25,8 @@ public interface TransactionMapper {
 
     @Named("moneyConversion")
     default String moneyConversion(BigInteger value) {
-        final Locale localeBrazil = new Locale("pt", "BR");
-        float result = (float) (value.floatValue() / 100.00);
-
-        return NumberFormat.getCurrencyInstance(localeBrazil).format(result);
+        double result = value.intValue() / 100.00;
+        return NumberFormat.getCurrencyInstance(LOCALE_BRAZIL).format(result);
     }
 
 }
