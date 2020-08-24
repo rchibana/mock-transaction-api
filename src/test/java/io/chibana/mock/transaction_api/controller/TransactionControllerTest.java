@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.io.UnsupportedEncodingException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,6 +33,18 @@ public class TransactionControllerTest {
         String month = "02";
 
         final MvcResult mvcResult = this.performGet(String.format(URL, userId, year, month), status().isOk());
+    }
+
+    @Test
+    public void testGetUserTransactionShouldReturnSameResponseWhenUsingSameValues() throws Exception {
+        String userId = "1000";
+        String year = "2020";
+        String month = "02";
+
+        final MvcResult mvcResultFirst = this.performGet(String.format(URL, userId, year, month), status().isOk());
+        final MvcResult mvcResultSecond = this.performGet(String.format(URL, userId, year, month), status().isOk());
+
+        assertEquals(getContentAsString(mvcResultFirst), getContentAsString(mvcResultSecond));
 
     }
 

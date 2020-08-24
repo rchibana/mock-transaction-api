@@ -1,5 +1,6 @@
 package io.chibana.mock.transaction_api.util;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -18,11 +19,12 @@ public class UtilsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {2, 3, 6 ,7, 8, 9})
-    public void testRandomBigDecimal(int value) {
-        BigInteger result = Utils.generateRandomBigInteger(value, 1);
-        assertTrue(result.toString().length() <= value);
-        assertTrue(result.toString().length() >= 1);
+    @ValueSource(ints = {10, 30000, 6000 , -7, 8000, 92})
+    public void testRandomBigDecimal(Integer maxValue) {
+        Integer minValue = -999999999;
+        BigInteger result = Utils.generateRandomBigInteger(maxValue, minValue);
+        assertTrue(result.intValueExact() <= maxValue);
+        assertTrue(result.intValueExact() >= minValue);
     }
 
 }

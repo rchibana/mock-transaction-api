@@ -15,10 +15,9 @@ public final class Utils {
         return RandomStringUtils.randomAlphabetic(randomValue);
     }
 
-    public static BigInteger generateRandomBigInteger(int maxLength, int minLength) {
-        final int randomValue = getRandomValue(maxLength, minLength);
-        final String value = RandomStringUtils.randomNumeric(randomValue);
-        return BigInteger.valueOf(Long.parseLong(value));
+    public static BigInteger generateRandomBigInteger(int maxValue, int minValue) {
+        final Integer randomValue = getRandomValue(maxValue, minValue);
+        return BigInteger.valueOf(Long.parseLong(randomValue.toString()));
     }
 
     private static int getRandomValue(int maxLength, int minLength) {

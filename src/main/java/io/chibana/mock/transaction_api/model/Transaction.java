@@ -21,7 +21,7 @@ public final class Transaction {
         this.userId = userId;
         this.createdDate = createdDate;
         this.description = Utils.generateRandomString(120, 10);
-        this.value = Utils.generateRandomBigInteger(7, 1);
+        this.value = Utils.generateRandomBigInteger(999999999, -999999999);
     }
 
     @Id
@@ -39,8 +39,8 @@ public final class Transaction {
     private String description;
 
     @NotNull
-    @DecimalMin(value = "-999999999")
-    @DecimalMax(value = "999999999")
+    @Min(value = -999999999)
+    @Max(value = 999999999)
     private BigInteger value;
 
     @NotNull
