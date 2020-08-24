@@ -15,6 +15,7 @@ public class TransactionServiceImpl implements TransactionService {
     private TransactionRepository transactionRepository;
 
     @Override
+    @Transactional
     public Transaction getOrCreateTransactionByTimestamp(final Transaction transaction) {
         return this.getUsersTransactionsByTimestamp(transaction)
                 .orElseGet(() -> this.createUsersTransaction(transaction));
