@@ -47,11 +47,17 @@ CREATE DATABASE mock_transaction_api
 - Execute the following command:
 
 ```
-$ ./gradlew bootRun --args='--spring.profiles.active=dev'
+$ ./gradlew build
+```
+And then
+```
+$ docker-compose up --build
 ```
 
 #### Not using docker
-
+```
+$ ./gradlew bootRun --args='--spring.profiles.active=dev'
+```
 
 
 After the execution of the command above(with or without docker), you must be able to see the swagger interface with 
