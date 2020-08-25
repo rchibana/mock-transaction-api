@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 @Data
 public class ApiResponseError {
 
     private HttpStatus statusCode;
-    private String errorMessage;
-
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private LocalDateTime timestamp;
+    private String title;
+    private List<ErrorField> errorFields;
+    private OffsetDateTime timestamp;
 
     public ApiResponseError() {
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = OffsetDateTime.now();
     }
 
     public ApiResponseError(HttpStatus statusCode) {

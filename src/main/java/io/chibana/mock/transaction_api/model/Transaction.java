@@ -1,6 +1,7 @@
 package io.chibana.mock.transaction_api.model;
 
 import io.chibana.mock.transaction_api.util.Utils;
+import io.chibana.mock.transaction_api.validator.UserId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,8 +30,7 @@ public final class Transaction {
     private Long id;
 
     @NotNull
-    @Min(value = 1000)
-    @Max(value = 100000000)
+    @UserId
     private Integer userId;
 
     @NotNull

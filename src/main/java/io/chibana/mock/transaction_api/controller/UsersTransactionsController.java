@@ -5,6 +5,9 @@ import io.chibana.mock.transaction_api.dto.TransactionResponseDTO;
 import io.chibana.mock.transaction_api.dto.mapper.TransactionMapper;
 import io.chibana.mock.transaction_api.model.Transaction;
 import io.chibana.mock.transaction_api.service.TransactionService;
+import io.chibana.mock.transaction_api.validator.Month;
+import io.chibana.mock.transaction_api.validator.UserId;
+import io.chibana.mock.transaction_api.validator.Year;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +29,9 @@ public class UsersTransactionsController {
 
     @GetMapping("/{year}/{month}")
     public TransactionResponseDTO getUsersTransactionsByYearAndMonth(
-            @PathVariable("userId") @Min(1000) @Max(100000000) Integer userId,
-            @PathVariable("year") @Min(1) @Max(9999) Integer year,
-            @PathVariable("month") @Min(1) @Max(12) Integer month) {
+            @PathVariable("userId") @UserId Integer userId,
+            @PathVariable("year") @Year Integer year,
+            @PathVariable("month") @Month Integer month) {
 
         final TransactionRequestDTO transactionRequestDTO = new TransactionRequestDTO(userId, year, month);
         Transaction transaction = this.transactionMapper.requestDTOToModel(transactionRequestDTO);
