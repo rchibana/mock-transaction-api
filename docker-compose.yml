@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  app:
+    container_name: mock-transaction-api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: mock-transaction-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PROFILE=docker
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=application
+      - POSTGRES_USER=application
+      - POSTGRES_DB=mock_transaction_api

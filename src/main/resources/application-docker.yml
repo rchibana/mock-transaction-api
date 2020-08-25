@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    username: application
+    password: application
+    url: jdbc:postgresql://db:5432/mock_transaction_api?serverTimezone=GMT
+  h2:
+    console:
+      enabled: false
